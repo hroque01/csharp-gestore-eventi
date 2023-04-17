@@ -153,10 +153,27 @@ namespace csharp_gestore_eventi
                         Console.WriteLine($"Errore: {e.Message}\n");
                     }
 
-                    Console.WriteLine($"Il numero di eventi nel vostro programma e' {Evento.count}");
-
-
                 }
+
+                //Stampa il numero di eventi presenti nel programma
+                Console.WriteLine($"Numero di eventi presenti nel programma: {programma.GetNumeroEventi()}");
+
+                //Stampa la lista di eventi inseriti nel programma
+                Console.WriteLine(ProgrammaEventi.StampaEventi(programma.Eventi));
+
+                //Chiede all'utente una data e stampa tutti gli eventi in quella data
+                Console.Write("Inserisci una data per visualizzare gli eventi in programma (dd/mm/yyyy): ");
+                DateTime dataRichiesta;
+                while (!DateTime.TryParseExact(Console.ReadLine(), "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out dataRichiesta))
+                {
+                    Console.Write("Inserisci una data valida (dd/mm/yyyy): ");
+                }
+
+                //Recupera la lista di eventi in base alla data inserita dall'utente
+                List<Evento> eventiInData = programma.GetEventiPerData(dataRichiesta);
+
+                //Stampa la lista di eventi in base alla data inserita dall'utente
+                Console.WriteLine(ProgrammaEventi.StampaEventi(eventiInData));
             }
 
 
