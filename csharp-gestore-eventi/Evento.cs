@@ -34,16 +34,20 @@ namespace csharp_gestore_eventi
             set
             {
                 if (value < DateTime.Today)
-                   throw new ArgumentOutOfRangeException("Inserisci una data che deve ancora venire.");
+                    throw new ArgumentOutOfRangeException("Inserisci una data che deve ancora venire.");
                 data = value;
             }
         }
-        
+
         public int CapienzaMassima
         {
             get { return capienza; }
         }
 
+        public int PostiDisponibili
+        {
+            get { return capienza - posti; }
+        }
         public int PostiPrenotati
         {
             get { return posti; }
@@ -77,7 +81,7 @@ namespace csharp_gestore_eventi
             if (DateTime.Today >= Data)
                 throw new InvalidOperationException("Non è possibile prenotare un evento che è già passato.");
             if (postiDaPrenotare > capienza - posti)
-                throw new InvalidOperationException("NOn ci sono abbastanza posti disponibili");
+                throw new InvalidOperationException("Non ci sono abbastanza posti disponibili");
             return posti += postiDaPrenotare;
         }
 

@@ -23,45 +23,68 @@ namespace csharp_gestore_eventi
 
                 Evento nuovoEvento = new Evento(titolo, dateTime, capienza);
 
-                // Chiedere all'utente di effettuare prenotazioni
-                while (true)
-                {
-                    Console.Write("Quanti posti vuoi prenotare? (0 per uscire): ");
-                    int prenotati = int.Parse(Console.ReadLine());
+                //Chiedere all'utente di prenotare i posti
+                Console.Write("Vuoi prenotare dei posti? si/no: ");
+                string risposta = Console.ReadLine();
 
-                    if (prenotati == 0)
-                        break;
+                do //Chiedi all'utente nel mentre che la rispsota e' SI
+                {
+                    Console.Write("Quanti posti desidere prenotare? ");
+                    int numPosti = int.Parse(Console.ReadLine());
 
                     try
                     {
-                        nuovoEvento.PrenotaPosti(prenotati);
-                        Console.WriteLine("Hai prenotato {0} posti. Posti disponibili: {1}", prenotati, nuovoEvento.PostiDisponibili);
+                        nuovoEvento.PrenotaPosti(numPosti);
+                        Console.WriteLine("Prenotazione effettuata con successo");
+                        Console.WriteLine($"Posti prenotati: {nuovoEvento.PostiPrenotati} \t posti disponibili: {nuovoEvento.PostiDisponibili}");
+
+                        if (nuovoEvento.PostiDisponibili == 0) //Se non ci sono posti disponibili, concludi
+                        {
+                            Console.WriteLine("Non ci sono più posti disponibili. Impossibile prenotare ulteriori posti.");
+                            break;
+                        }
+
                     }
-                    catch (ArgumentException ex)
+                    catch (Exception e)
                     {
-                        Console.WriteLine("Errore: " + ex.Message);
+                        Console.WriteLine(e.Message);
                     }
-                }
 
-                // Chiedere all'utente di disdire posti
-                while (true)
+                    Console.Write("Vuoi prenotare altri posti? si/no: ");
+                    risposta = Console.ReadLine();
+
+                } while (risposta.ToLower() == "si");
+
+                //Chiedere all'utente di prenotare i posti
+                Console.Write("Vuoi disdire dei posti? si/no: ");
+                string rispostaDisdetta = Console.ReadLine();
+
+                do //Chiedi all'utente nel mentre che la rispsota e' SI
                 {
-                    Console.Write("Quanti posti vuoi disdire? (0 per uscire): ");
-                    int disdetti = int.Parse(Console.ReadLine());
-
-                    if (disdetti == 0)
-                        break;
+                    Console.Write("Quanti posti vuoi desidere? ");
+                    int numPosti = int.Parse(Console.ReadLine());
 
                     try
                     {
-                        nuovoEvento.DisdiciPosti(disdetti);
-                        Console.WriteLine("Hai disdetto {0} posti. Posti disponibili: {1}", disdetti, nuovoEvento.PostiDisponibili);
+                        nuovoEvento.DisdiciPosti(numPosti);
+                        Console.WriteLine("Prenotazione effettuata con successo");
+                        Console.WriteLine($"Posti prenotati: {nuovoEvento.PostiPrenotati} \t posti disponibili: {nuovoEvento.PostiDisponibili}"); 
                     }
-                    catch (ArgumentException ex)
+                    catch (Exception e)
                     {
-                        Console.WriteLine("Errore: " + ex.Message);
+                        Console.WriteLine(e.Message);
                     }
-                }
+
+                    Console.Write("Vuoi disdire altri posti? si/no: ");
+                    rispostaDisdetta = Console.ReadLine();
+
+                } while (rispostaDisdetta.ToLower() == "si");
+
+
+
+
+
+
             }
 
             //Prenotazioni
