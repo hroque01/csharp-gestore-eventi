@@ -33,9 +33,25 @@ namespace csharp_gestore_eventi
 
             set
             {
-                if (value < DateTime.Today)
-                    throw new ArgumentOutOfRangeException("Inserisci una data che deve ancora venire.");
-                data = value;
+                bool validation = false;
+
+                while (!validation) 
+                { 
+                    try
+                    {
+                        if (value < DateTime.Today)
+                            throw new ArgumentOutOfRangeException("Inserisci una data che deve ancora venire.");
+                        data = value;
+                        validation = true;
+                    }
+                    catch (ArgumentException e)
+                    {
+                        Console.WriteLine(e.Message);
+                        Console.WriteLine("Inserisci una nuova data (formato dd/MM/yyyy):");
+                        value = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", null);
+                    }
+                }
+                
             }
         }
 

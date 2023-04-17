@@ -24,6 +24,11 @@ namespace csharp_gestore_eventi
         //Aggiunge un evento alla lista
         public void AggiungiLista(Evento evento)
         {
+            if (evento == null)
+            {
+                throw new ArgumentNullException(nameof(evento), "L'evento non può essere nullo.");
+            }
+
             Eventi.Add(evento);
         }
 
@@ -66,6 +71,8 @@ namespace csharp_gestore_eventi
             }
             return result;
         }
+
+
 
 
 
