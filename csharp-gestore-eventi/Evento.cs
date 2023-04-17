@@ -30,10 +30,11 @@ namespace csharp_gestore_eventi
         public DateTime Data
         {
             get { return data; }
+
             set
             {
                 if (value < DateTime.Today)
-                    throw new ArgumentOutOfRangeException("Inserisci una data che deve ancora venire.");
+                   throw new ArgumentOutOfRangeException("Inserisci una data che deve ancora venire.");
                 data = value;
             }
         }
@@ -51,13 +52,21 @@ namespace csharp_gestore_eventi
         //Costruttore
         public Evento(string titolo, DateTime data, int capienza)
         {
-            Titolo = titolo;
-            Data = data;
+            try
+            {
+                Titolo = titolo;
+                Data = data;
 
-            if (capienza < 0)
-                throw new ArgumentException("La capienza massima deve essere un numero positivo");
-            this.capienza = capienza;
-            posti = 0;
+                if (capienza < 0)
+                    throw new ArgumentException("La capienza massima deve essere un numero positivo");
+                this.capienza = capienza;
+                posti = 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+           
         }
 
         //Metodi
