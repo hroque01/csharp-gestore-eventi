@@ -23,6 +23,7 @@ namespace csharp_gestore_eventi
 
                 Evento nuovoEvento = new Evento(titolo, dateTime, capienza);
 
+                //Prenotazioni
                 //Chiedere all'utente di prenotare i posti
                 Console.Write("Vuoi prenotare dei posti? si/no: ");
                 string risposta = Console.ReadLine();
@@ -55,6 +56,7 @@ namespace csharp_gestore_eventi
 
                 } while (risposta.ToLower() == "si");
 
+                //Disdetta
                 //Chiedere all'utente di prenotare i posti
                 Console.Write("Vuoi disdire dei posti? si/no: ");
                 string rispostaDisdetta = Console.ReadLine();
@@ -80,16 +82,7 @@ namespace csharp_gestore_eventi
 
                 } while (rispostaDisdetta.ToLower() == "si");
 
-
-
-
-
-
             }
-
-            //Prenotazioni
-
-
 
         }
     }
