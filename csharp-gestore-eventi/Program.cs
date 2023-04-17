@@ -83,6 +83,8 @@ namespace csharp_gestore_eventi
                 } while (rispostaDisdetta.ToLower() == "si");
 
             }
+            
+            //Creazione Lista eventi
 
         }
     }
